@@ -55,23 +55,29 @@ public class Dijkstra {
         // TODO(you): implement Dijkstra. Read g.size(), g.neighbors(u), e.to, e.weight.
         //            Leaving dist null for now -- the harness prints a friendly
         //            "not implemented yet" until you fill this in.
-
+        // gets the size of the graph so we know what size of arrays we need
         int n = g.size();
+        // make the distances array
         dist = new int[n];
+        //make the previous node array
         prev = new int[n];
+
+        //build the distance and previous node arrays
         for (int i = 0; i < n; i++) {
             dist[i] = INF;
             prev[i] = -1;
         }
 
+        // initial distance is 0
         dist[source] = 0;
         PriorityQueue<State> pq = new PriorityQueue<>();
+        // add states (distance ond node to the queue to look through)
         pq.add(new State(source, 0));
 
+        // look through each map node in the queue and update the states
         while (!pq.isEmpty()) {
             State cur = pq.poll();
             int u = cur.vertex;
-
 
             if (cur.distance != dist[u]) {
                 continue;
@@ -128,3 +134,7 @@ public class Dijkstra {
         return path;
     }
 }
+
+// more write up: in the video it talks about creating paths from each point, start and finish and finding the node that both paths hit first,
+// so being able to reverse one end or the other to reconnect them is helpful...
+// this drained my brain
